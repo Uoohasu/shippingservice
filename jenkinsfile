@@ -24,8 +24,8 @@ spec:
   # Use service account that can deploy to all namespaces
   # serviceAccountName: cd-jenkins
   containers:
-  - name: maven
-    image: maven:latest
+  - name: golang
+    image: golang:1.10
     command:
     - cat
     tty: true
@@ -43,9 +43,9 @@ spec:
 }
   }
   stages {
-    stage('maven') {
+    stage('Test') {
       steps {
-        container('maven') {
+        container('golang') {
           sh """
             ln -s `pwd`
           """
@@ -59,11 +59,11 @@ spec:
         }
       }
     }
-    stage('Deploy Canary') {
-      // Canary branch
-      when { branch 'canary' }
+    stage('Deploy Dev') {
       steps {
-        container('kubectl') 
+        container('kubectl') {
+                
+        }
       }
     }
   }
