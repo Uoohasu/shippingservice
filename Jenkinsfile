@@ -62,7 +62,7 @@ spec:
     stage('Deploy Dev') {
       steps {
         container('kubectl') {
-          sh "gcloud container clusters get-credentials appdeployment --zone us-central1-c --project my-project-600-339318"
+          sh "gcloud container clusters get-credentials cluster-1 --zone asia-south1-c --project my-project-600-339318"
           sh "kubectl apply -f shippingservice.yaml"
                 
         }
