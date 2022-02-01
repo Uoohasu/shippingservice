@@ -4,7 +4,7 @@ pipeline {
     PROJECT = "my-project-600-339318"
     APP_NAME = "shippingservice"
     FE_SVC_NAME = "${APP_NAME}-frontend"
-    CLUSTER = "appdeployment"
+    CLUSTER = "deployjenkins"
     CLUSTER_ZONE = "us-central1-c"
     IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
     JENKINS_CRED = "${PROJECT}"
@@ -62,7 +62,7 @@ spec:
     stage('Deploy Dev') {
       steps {
         container('kubectl') {
-          sh "gcloud container clusters get-credentials appdeployment --zone us-central1-c --project my-project-600-339318"
+          sh "gcloud container clusters get-credentials deployjenkins --zone us-central1-c --project my-project-600-339318"
           sh "kubectl apply -f shippingservice.yaml"
                 
         }
