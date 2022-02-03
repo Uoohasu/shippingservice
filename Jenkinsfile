@@ -45,7 +45,7 @@ spec:
   stages {
     stage('Test') {
       steps {
-        container('golang') {
+        container('python') {
           sh """
             ln -s `pwd`
           """
@@ -62,6 +62,8 @@ spec:
     stage('Deploy Dev') {
       steps {
         container('kubectl') {
+          sh "gcloud container clusters get-credentials su-cluster --zone us-central1-c --project subbareddy-336408"
+          sh "kubectl --help"
        
                 
         }
