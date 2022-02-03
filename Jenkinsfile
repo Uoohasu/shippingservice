@@ -2,7 +2,7 @@ pipeline {
 
   environment {
     PROJECT = "subbareddy-336408"
-    APP_NAME = "shippingservice"
+    APP_NAME = "shipping"
     FE_SVC_NAME = "${APP_NAME}-frontend"
     CLUSTER = "su-cluster"
     CLUSTER_ZONE = "us-central1-c"
@@ -24,8 +24,8 @@ spec:
   # Use service account that can deploy to all namespaces
   # serviceAccountName: cd-jenkins
   containers:
-  - name: golang
-    image: golang:1.10
+  - name: python
+    image: python:3.9.10-slim-bullseye
     command:
     - cat
     tty: true
@@ -43,11 +43,11 @@ spec:
 }
   }
   stages {
-    stage('Test') {
+    stage('build') {
       steps {
         container('python') {
           sh """
-            ln -s `pwd`
+            ln -s `pwd` 
           """
         }
       }
@@ -64,8 +64,8 @@ spec:
         container('kubectl') {
           sh "gcloud container clusters get-credentials su-cluster --zone us-central1-c --project subbareddy-336408"
           sh "kubectl --help"
-       
-                
+          
+         
         }
       }
     }
